@@ -1,0 +1,7 @@
+add-trailing-comma
+autopep8
+bandit
+flake8
+mypy
+pre-commit
+tox

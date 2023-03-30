@@ -30,6 +30,7 @@ def convert_pdf_to_img(path: str) -> list[str]:
     console.print(path, "converted to", ", ".join(files))
     return files
 
+
 @cli.command("imgs-to-pdf")
 def convert_imgs_to_pdf(images_path: list[str]) -> str:
     dest, filename = resolv_path(images_path[0])
