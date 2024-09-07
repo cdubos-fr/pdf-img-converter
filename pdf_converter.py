@@ -1,5 +1,5 @@
 """A simple cli to convert pdf to images and back."""
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 import os
 from pdf2image import convert_from_path
 from PIL import Image
