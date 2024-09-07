@@ -38,4 +38,3 @@ branches:
       enforce_admins: true
       required_linear_history: true
       restrictions:
-        apps: []
