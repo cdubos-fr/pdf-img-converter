@@ -32,9 +32,6 @@ branches:
         required_approving_review_count: 1
         dismiss_stale_reviews: true
         require_code_owner_reviews: true
-        dismissal_restrictions:
-          users: []
-          teams: []
       required_status_checks:
         strict: true
         contexts: []
@@ -42,5 +39,3 @@ branches:
       required_linear_history: true
       restrictions:
         apps: []
-        users: []
-        teams: []
