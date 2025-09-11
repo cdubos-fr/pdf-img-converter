@@ -1,11 +1,55 @@
 set shell := ["zsh", "-uc"]
 
-devenv:
-    tox devenv -e devenv .venv
-    pre-commit install
+default:
+    @just --list
 
-clear:
-    rm -r .venv
-    rm -r .ruff_cache
-    rm -r .tox
-    rm -r .vagrant
+devenv: lock
+    @echo "Setting up development environment"
+    @tox devenv -e devenv .venv
+    @echo "Activating virtual environment"
+    @source .venv/bin/activate
+    @pre-commit install
+    @echo "✓ Development environment ready"
+
+# Run all checks
+check:
+    tox
+
+# Run tests
+test:
+    @tox -e tests
+
+# Run type checking
+typecheck:
+    @tox -e typing
+
+# Format code
+format:
+    @pre-commit run ruff-format --all-files
+
+# Lint code
+lint:
+    @pre-commit run ruff-check --all-files
+
+clean:
+    @find . -type d -name .venv -exec rm -rf {} +
+    @find . -type d -name __pycache__ -exec rm -rf {} +
+    @find . -type d -name .ruff_cache -exec rm -rf {} +
+    @find . -type d -name dist -exec rm -rf {} +
+    @find . -type d -name build -exec rm -rf {} +
+    @find . -type d -name .pytest_cache -exec rm -rf {} +
+    @find . -type d -name "*.egg-info" -exec rm -rf {} +
+    @find . -type d -name .mypy_cache -exec rm -rf {} +
+    @find . -type d -name .direnv -exec rm -rf {} +
+    @find . -type d -name .tox -exec rm -rf {} +
+    @find . -type d -name site -exec rm -rf {} +
+    @find . -type f -name .coverage -exec rm -rf {} +
+    @find . -type d -name result -exec rm -rf {} +
+    @find . -type d -name __pycache__ -exec rm -rf {} +
+
+lock:
+    @pdm lock -G :all
+
+# Update dependencies
+update:
+    @pdm update
